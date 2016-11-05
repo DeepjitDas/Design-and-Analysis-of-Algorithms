@@ -1,0 +1,70 @@
+ /*                                            ***Floyd Warshall***
+ ==========================================================================================================================*/
+
+#include<stdio.h>
+#include<conio.h>
+#define size 10
+int Floyd_Warshall(int a[size][size],int p)
+{
+	int i,j,k;
+	for(k=0;k<p;k++)
+	{
+		for(i=0;i<p;i++)
+		{
+			for(j=0;j<p;j++)
+			{
+				if(a[i][j]>a[i][k]+a[k][j])
+					a[i][j]=a[i][k]+a[k][j];
+				if(a[i][j]==99) //We use 99 as infinity. 
+					printf("inf\t");
+				else
+					printf("%d\t",a[i][j]);
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+	return 0;
+}
+//----------------------------------------------------------------------
+int main()
+{
+	int a[size][size],p,i,j;
+	printf("enter the number of vertices: ");
+	scanf("%d",&p);
+	printf("\nenter the initial matrix( give 99 in place of infinity):\n");
+	for(i=0;i<p;i++) //Scaning user input of initial matrix.
+	{
+		for(j=0;j<p;j++)
+		{
+			printf("\nenter the matrix of [%d][%d]: ",i,j);
+			scanf("%d",&a[i][j]);
+		}
+	}
+	printf("\nyour initial matrix is :\n");
+	for(i=0;i<p;i++) //Displaying the initial matirx.
+	{
+		for(j=0;j<p;j++)
+		{
+			if(a[i][j]==99)
+				printf("inf\t");
+			else
+				printf("%d\t",a[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+	printf("the matrices on each etaration:\n");
+	Floyd_Warshall(a,p); //calling Floyd_Warshall function.
+	printf("the final matrix is :\n");
+	for(i=0;i<p;i++) // Displaying the final matrix.
+	{
+		for(j=0;j<p;j++)
+		{
+				printf("%d\t",a[i][j]);
+		}
+		printf("\n");
+	}
+	getch();
+	return 0;
+} 
